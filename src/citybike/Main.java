@@ -17,7 +17,7 @@ public class Main {
         Bike bike7 = new Bike( "brown", "CanBeRented");
         Bike bike8 = new Bike( "gray", "Discarded");
         Bike bike9 = new Bike( "black", "CanBeRented");
-        Bike bike10 = new Bike( "gurke", "CanBeRented");
+        Bike bike10 = new Bike( "colored", "CanBeRented");
 
         HashMap<Integer, Bike> allBikes = new  HashMap<Integer, Bike>();
         allBikes.put(1, bike1);
