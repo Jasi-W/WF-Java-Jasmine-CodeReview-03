@@ -7,7 +7,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        //BIKES - create 10 Bikes (10)
+        //BIKES
         Bike bike1 = new Bike( "white", "CanBeRented");
         Bike bike2 = new Bike( "yellow", "InService");
         Bike bike3 = new Bike( "orange", "Discarded");
@@ -19,7 +19,6 @@ public class Main {
         Bike bike9 = new Bike( "black", "CanBeRented");
         Bike bike10 = new Bike( "gurke", "CanBeRented");
 
-        //Hashmap - put all Bikes in the HashMap (10)
         HashMap<Integer, Bike> allBikes = new  HashMap<Integer, Bike>();
         allBikes.put(1, bike1);
         allBikes.put(2, bike2);
@@ -32,13 +31,12 @@ public class Main {
         allBikes.put(9, bike9);
         allBikes.put(10, bike10);
 
-        //Print all BIKES
         System.out.println("\nBIKES:");
         allBikes.forEach((k, v) -> {
             System.out.println("id: " +v.getBikeID()+ " color: " +v.color+ " State: "  + v.state);
         });
 
-        //STATIONS - create 3 Stations Objects and put them in a HashMap (10)
+        //STATIONS
         List<Bike> arrStation1 = new ArrayList<Bike>();
         arrStation1.add(bike1);
         arrStation1.add(bike4);
@@ -49,7 +47,7 @@ public class Main {
         arrStation2.add(bike3);
         arrStation2.add(bike2);
         arrStation2.add(bike6);
-        arrStation1.add(bike5);
+        arrStation2.add(bike5);
         Station station2 = new Station( "Location 2", arrStation2 );
 
         List<Bike> arrStation3 = new ArrayList<Bike>();
@@ -60,16 +58,7 @@ public class Main {
         allStations.put(station2.getStationID(), station2);
         allStations.put(station3.getStationID(), station3);
 
-        //TODO Print STATIONS
-        System.out.println("\nSTATIONS: ");
-        allStations.forEach((k, v) -> {
-            System.out.println("\nID: " +v.getStationID()+ " Location: " +v.getLocation()+ " Bikes: ");
-                v.currentlyInStation.forEach((b) -> {
-                    System.out.println("ID: " +b.getBikeID()+ " Color: " +b.color);
-            });
-        });
-
-        allStations.get(1).removeBike(allBikes.get(1));
+        printAllStations(allStations);
 
         //USERS
         User user1 = new User(1, "Anna", "Wild", null);
@@ -77,34 +66,36 @@ public class Main {
         User user3 = new User(3, "Leon", "Lang", null);
         User user4 = new User(4, "Maria", "Kurz", null);
 
-//        ArrayList<User> allUsers = new ArrayList<>();
-//        allUsers.add(user1);
-//        allUsers.add(user2);
-//        allUsers.add(user3);
-//        allUsers.add(user4);
-
         HashMap<Integer, User> allUser = new HashMap<>();
         allUser.put(user1.userID, user1);
         allUser.put(user2.userID, user2);
         allUser.put(user3.userID, user3);
         allUser.put(user4.userID, user4);
 
-        //TODO Print USERS
-        System.out.println("\nUSERS: ");
-
+        System.out.println("USERS: ");
         allUser.forEach((key, value) -> {
             System.out.println("ID: " +value.userID+ " Name: " + value.firstname+ " "  +value.lastname);
         });
 
-//        userZ rents a bike bikeX from stationY1
-//        bikeX is removed from the data of that Station, and connected to a userZ
+        // userZ rents a bike bikeX from stationY1
+        // bikeX is removed from the data of that Station, and connected to a userZ
         user1.rentBike(station1, bike4);
+        printAllStations(allStations);
 
-        //printAllStations(allStations);
-
-        //        userZ returns a bike to stationY2
+        //userZ returns a bike to stationY2
         user1.returnBike(station2, bike4);
-        //printAllStations(allStations);
+        printAllStations(allStations);
+    }
+
+    public static void printAllStations(HashMap <Integer, Station> allStations){
+        System.out.println("\nSTATIONS: ");
+        allStations.forEach((k, v) -> {
+            System.out.println("Station ID: " +v.getStationID()+ " in " +v.getLocation()+ " \n" +v.currentlyInStation.size()+ " Bikes in the Station: ");
+            v.currentlyInStation.forEach((b) -> {
+                System.out.println("--> bikeID: " +b.getBikeID()+ " Color: " +b.color);
+            });
+            System.out.println();
+        });
     }
 }
 

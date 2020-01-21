@@ -6,10 +6,10 @@ import java.util.List;
 public class Station {
 
     //Attributes
-    private int stationID = 0;
-    private String location;
+    public int stationID;
+    public String location;
     public List<Bike> currentlyInStation = new ArrayList<>();
-    public static int counter = 0;
+    public static int counter = 1;
 
     //Constructor
     public Station(String location, List<Bike> currentlyInStation){
